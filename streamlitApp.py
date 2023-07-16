@@ -5,6 +5,9 @@ import matplotlib.pyplot as plt
 import csv
 import pandas as pd
 from io import StringIO
+from PIL import Image
+import requests
+import urllib.request
 
 
 net = cv.dnn.readNetFromTensorflow("graph_opt.pb") # weights
@@ -24,12 +27,23 @@ POSE_PAIRS = [ ["Neck", "RShoulder"], ["Neck", "LShoulder"], ["RShoulder", "RElb
                ["LHip", "LKnee"], ["LKnee", "LAnkle"], ["Neck", "Nose"], ["Nose", "REye"],
                ["REye", "REar"], ["Nose", "LEye"], ["LEye", "LEar"] ]
 
-uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
+uploadedFile = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
 
-if uploaded_file is not None:
+url = "https://media.geeksforgeeks.org/\
+wp-content/uploads/20210224040124/\
+JSBinCollaborativeJavaScriptDebugging6-300x160.png"
+
+urllib.request.urlretrieve(url, "geeksforgeeks.png")
+
+defaultImage = np.asarray(Image.open(r"geeksforgeeks.png"))
+
+defaultImage = cv.cvtColor(defaultImage, cv.COLOR_BGRA2BGR)
+
+if uploadedFile is not None:
     # Load image using OpenCV
-    img = cv.imdecode(np.fromstring(uploaded_file.read(), np.uint8), 1)
-
+    img = cv.imdecode(np.fromstring(uploadedFile.read(), np.uint8), 1)
+else:
+    img = defaultImage
     # Display original and YSBCR images
     #st.image(img, caption='Original Image', use_column_width=True)
 
