@@ -33,7 +33,7 @@ url = "https://media.geeksforgeeks.org/\
 wp-content/uploads/20210224040124/\
 JSBinCollaborativeJavaScriptDebugging6-300x160.png"
 
-urllib.request.urlretrieve(url, "geeksforgeeks.png")
+urllib.request.urlretrieve(url,"geeksforgeeks.png")
 
 defaultImage = np.asarray(Image.open(r"geeksforgeeks.png"))
 
