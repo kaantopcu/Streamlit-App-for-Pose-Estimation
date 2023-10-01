@@ -1,6 +1,6 @@
 matplotlib==3.7.1
 numpy
-opencv-python
+opencv-python==4.8.0.74
 pandas
 Pillow==9.2.0
 Requests==2.31.0
